@@ -1,0 +1,19 @@
+--- #YAML:1.0
+name: Sau-Client
+version: 0.51
+author: Ask Bjoern Hansen <ask@develooper.com>
+abstract: Client library for the Sau single sign-on service
+license: open_source
+requires:
+  Cache::Cache: 1.02
+  Digest::SHA1: 0
+  LWP::UserAgent: 0
+  URI::Escape: 0
+  XML::Simple: 2.12
+build_requires:
+  Test::WWW::Mechanize: 0
+provides:
+  Sau::Client:
+    file: Client.pm
+    version: 0.51
+generated_by: Module::Build version 0.25

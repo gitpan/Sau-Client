@@ -1,0 +1,40 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.39.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It would check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+
+SHA1 57c0b125d924017752945155c74328b9339ea168 Build.PL
+SHA1 e598a5ebe18d52f8b3f43e77e0448baa2e5b06b6 Client.pm
+SHA1 2b8b815229aa8a61e483fb4ba0588b8b6c491890 LICENSE
+SHA1 c78ac1a0089dfe4690eeaa4f2452470dbe27fd4d MANIFEST
+SHA1 87f0a5b4b94fd2bb38ace4f8aee93307de2fad10 META.yml
+SHA1 04f9365d67c25bbd81c55f66db805efe8831b56c Makefile.PL
+SHA1 9c8759b5bfe3c18c6e5bab45488f978c725390d8 NOTICE
+SHA1 6cf49009a1336eaea9b1cdfdf0e035f8a5146c28 README
+SHA1 790fd39b68951a8c0998562fd763a46d718999bc t/10authconfig.t
+SHA1 ed501026da6c5b6ec333371381dc6f72be1295e9 t/11login.t
+SHA1 81a41e50bbd80cae76fd2794289b34d745d49e6a t/12ticket.t
+SHA1 8907053e4c1a5b6d9bef1c4c4ef074a18bc05eb6 t/13podcoverage.t
+SHA1 16e409e2fbeeec9ca8fa82b7cdd824d6a3a6e2c6 t/14session.t
+SHA1 e9c6a5881fc60173fbc8d479c1afd2ce3b43bef1 t/15pod.t
+SHA1 3961c44f688067cb60f20a7f7a506fcdf0365073 t/16multiplesites.t
+SHA1 7590640978aafd016ef4f36b884a6e8445e9a4b1 t/Test/AuthClient.pm
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.2.4 (Darwin)
+
+iQCVAwUBQOtP1fkoKP1ixIspAQFPCwP/cCetHA9dWs8olGiq+8uFalv5dG8obpfH
++RbSD3IeCDoehovhGlVZhffExzAaaeOr7AhBCIydae6bGWBy/cvWlYOYDb+COrJA
+xUiGkAJMBwbz4/2yxOZAW5A+L4EwLQBO84wZC2S8Y3/Ck31TM3wQKJn3ie22ZzSG
+RktoO9sojZQ=
+=Z2Oy
+-----END PGP SIGNATURE-----

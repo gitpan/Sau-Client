@@ -1,0 +1,134 @@
+NAME
+    Sau::Client - Client library for the Sau single sign-on service
+
+SYNOPSIS
+      Sau::Client->set_config(service  => 'http://g.develooper.com:8667/',
+                              site_id  => 5,
+                              site_key => '9cf205cc2d5df60b69246a8b58061a',
+                             );
+
+      my $auth = Sau::Client->new();
+      $cgi->redirect($auth->login_url(return_url   => "http://my.site/path/",
+                                      info_request => 'email',
+                                     );
+  
+      # new request, user comes back from the auth service with a "t" parameter
+      my $auth = Sau::Client->new(t => $r->param('t'));
+      if ($auth->is_authenticated) {
+        print "Hello ", $auth->username if $auth->username;
+        ... # show stuff for logged in users
+      }
+  
+METHODS
+    set_config (service => $service_base_url, site_id => $our_id, site_key
+    => $site_key)
+        Class method initializing the auth client. You (currently) must call
+        this function at least once every 6 hours.
+
+    login_url (return_url => $url, info_request => $info_request)
+        Returns the login url on the auth service with the appropriate query
+        string for your site.
+
+        return_url
+            Specify the url the auth server will redirect to after a
+            successful login. It must be within the domain specified in the
+            site setup.
+
+        info_request
+            By default the only information the auth server provides about
+            the user is an ID number and a site session id. Both are unique
+            to your site and can not be correlated to IDs on other sites.
+            (This implementation doesn't expose the "site session id" in the
+            interface).
+
+            The info request parameter takes either a comma separated string
+            or an array ref, for example "username" or ['email','username'].
+
+            Valid parameters are currently "email" and "username".
+
+            The user will get shown an options page and must explicitly
+            allow the auth server to pass the information. If the user allow
+            the information to be passed, this preference will be remembered
+            for the future.
+
+            Take note that this means you might get returned an
+            authenticated user that is not giving the site the requested
+            information. If the information is required for your site to
+            function you can explain that to the user and direct them back
+            to the login_url.
+
+    logout_url (return_url => $return_url)
+        As login_url, but only supports the return_url parameter.
+
+    new (ticket => $ticket OR session_id => $session_id)
+        Create a new auth object.
+
+        The auth server will include a "t" parameter in the query string in
+        the return url after the user logs in. This is a one time "ticket"
+        Sau::Client uses to create a new session. You must call the
+        session_id method to get the session id and store it in a cookie and
+        then use that on subsequent requests from the same user.
+
+    delete_session
+        Deletes the current session. Must be called when the "logout url" is
+        requested.
+
+    is_authenticated
+        Returns true if we have a valid session with a logged in user.
+
+    session_id
+        Returns the session_id for the current session. If you created a new
+        session with a "ticket" you MUST set a cookie and use that to
+        reference the session again.
+
+    user_id
+        Returns the numerical id of the user. The id is specific to your
+        site.
+
+    email
+        If requested (and the user allowed) returns the primary email
+        address of the user.
+
+    username
+        If requested (and the user allowed) returns the username of the
+        user.
+
+    data_age
+        Returns the number of seconds since the session data was last
+        refreshed from the auth server.
+
+    force_refresh($seconds)
+        Force a refresh of the session data if the cached data is older than
+        $seconds.
+
+    config
+        Returns a hashref with the current configuration. (This method
+        should not usually be used unless you are subclassing the module).
+
+TODO
+    Create session_ids that can be decrypted back to a site_session so we
+    can expire the cache without having users lose their session with the
+    site.
+
+    Allow use of something else than Cache::FileCache for the session cache.
+
+    Allow configuration of the Cache:: module
+
+    Add the "force" ("f") parameter to the login_url parameters (and
+    documentation)
+
+AUTHOR
+    Copyright 2004 Ask Bjoern Hansen, Develooper LLC (ask@develooper.com)
+
+    Licensed under the Apache License, Version 2.0 (the "License"); you may
+    not use this file except in compliance with the License. You may obtain
+    a copy of the License at
+
+       L<http://www.apache.org/licenses/LICENSE-2.0>
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+

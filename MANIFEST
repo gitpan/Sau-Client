@@ -1,0 +1,21 @@
+Build.PL
+Client.pm
+MANIFEST			This list of files
+META.yml
+README
+Makefile.PL
+
+t/10authconfig.t
+t/11login.t
+t/12ticket.t
+t/13podcoverage.t
+t/14session.t
+t/15pod.t
+t/16multiplesites.t
+t/Test/AuthClient.pm
+
+LICENSE
+NOTICE
+
+
+SIGNATURE    Added here by Module::Build
